@@ -5,14 +5,12 @@ import java.util.Map;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -22,10 +20,10 @@ public class Controller {
    static Map<String,String> m = new HashMap<>();
   
     Controller(){
-      m.put("1","8");
-      m.put("2","9");
-      m.put("3","9");
-      m.put("45","8");
+      
+     for(int i=1;i<=30;i++)
+     m.put(""+i,"8");
+
       System.out.println("askjfg");
     }
 
@@ -46,13 +44,40 @@ public class Controller {
          System.out.println(mapElement.getKey()+" "+mapElement.getValue());
        }
 
-
-
         if(dayId!=null)
         return true;
         return false;
 
     }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping(value=("/uploadFile"))
+    public void uploadFile(
+            @RequestParam("file") MultipartFile uploadfile) {
+
+       System.out.println("file upload");
+
+        if (uploadfile.isEmpty()) {
+            System.out.println("file empty");
+        }
+
+        try {
+
+            
+         } catch (Exception e) {
+            System.out.println(e);
+         }
+          System.out.println("everything fine");
+    
+
+    }
+
+
+    @GetMapping("/testapi")
+    public String testApi(){
+      return "Hello World";
+    }
+
  
 
    
